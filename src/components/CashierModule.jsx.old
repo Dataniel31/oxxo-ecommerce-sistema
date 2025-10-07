@@ -1,0 +1,444 @@
+import React, { useState, useEffect } from 'react';
+import { Search, Check, X, Package, User, Clock, AlertTriangle, CheckCircle, LogOut, RefreshCw, Camera, Settings } from 'lucide-react';
+import { orderManager, ORDER_STATUSES, STATUS_DESCRIPTIONS } from '../utils/orderManager';
+import CashierLogin from './CashierLogin';
+import AlternativeScanner from './AlternativeScanner';
+
+const CashierModule = () => {
+  const [searchCode, setSearchCode] = useState('');
+  const [validationResult, setValidationResult] = useState(null);
+  const [isValidating, setIsValidating] = useState(false);
+  const [loggedInCashier, setLoggedInCashier] = useState(null);
+  const [lastSyncTime, setLastSyncTime] = useState(Date.now());
+  const [orderHistory, setOrderHistory] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
+
+  // Cargar historial de órdenes al iniciar
+  useEffect(() => {
+    loadOrderHistory();
+  }, []);
+
+  // Configurar sincronización automática
+  useEffect(() => {
+    // Listener para actualizaciones de órdenes
+    const handleOrdersUpdate = () => {
+      console.log('🔄 Actualizando cajero - nuevas órdenes detectadas');
+      setLastSyncTime(Date.now());
+      loadOrderHistory(); // Recargar historial cuando hay cambios
+    };
+
+    window.addEventListener('ordersUpdated', handleOrdersUpdate);
+    
+    // Auto-refresh cada 5 segundos
+    const interval = setInterval(() => {
+      orderManager.getAllOrders(); // Esto fuerza la sincronización
+      loadOrderHistory(); // Actualizar historial regularmente
+    }, 5000);
+
+    return () => {
+      window.removeEventListener('ordersUpdated', handleOrdersUpdate);
+      clearInterval(interval);
+    };
+  }, []);
+
+  const loadOrderHistory = async () => {
+    try {
+      const orders = await orderManager.getAllOrders();
+      const ordersArray = Object.values(orders).sort((a, b) => 
+        new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      );
+      setOrderHistory(ordersArray);
+    } catch (error) {
+      console.warn('Error cargando historial:', error);
+    }
+  };
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat('es-PE', {
+      style: 'currency',
+      currency: 'PEN',
+      minimumFractionDigits: 2
+    }).format(price);
+  };
+
+  const handleLogin = (cashierData) => {
+    setLoggedInCashier(cashierData);
+    console.log('✅ Cajero logueado:', cashierData);
+  };
+
+  const handleLogout = () => {
+    setLoggedInCashier(null);
+    setValidationResult(null);
+    setSearchCode('');
+    console.log('👋 Cajero deslogueado');
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !isValidating) {
+      handleSearch();
+    }
+  };
+
+  const handleScanSuccess = (scannedCode) => {
+    console.log('📱 Código escaneado:', scannedCode);
+    setSearchCode(scannedCode);
+    setShowScanner(false);
+    
+    // Auto-buscar después de escanear
+    setTimeout(() => {
+      handleSearchWithCode(scannedCode);
+    }, 500);
+  };
+
+  const handleSearchWithCode = async (code = searchCode) => {
+    if (!code.trim()) {
+      alert('Por favor ingresa un código de orden');
+      return;
+    }
+
+    setIsValidating(true);
+    
+    try {
+      console.log('🔍 Buscando orden en servidor:', code.toUpperCase());
+      
+      // Buscar la orden en el servidor
+      const order = await orderManager.getOrder(code.toUpperCase());
+      
+      if (order) {
+        console.log('✅ Orden encontrada:', order);
+        
+        // Actualizar estado a preparando si aún está confirmado
+        if (order.status === ORDER_STATUSES.CONFIRMED) {
+          await orderManager.updateOrderStatus(order.id, ORDER_STATUSES.PREPARING, `El cajero ${loggedInCashier.name} está preparando tu pedido`);
+          // Obtener la orden actualizada
+          const updatedOrder = await orderManager.getOrder(order.id);
+          setValidationResult({
+            success: true,
+            order: updatedOrder,
+            message: `✅ Orden encontrada - Iniciando preparación`
+          });
+        } else if (order.status === ORDER_STATUSES.PREPARING) {
+          setValidationResult({
+            success: true,
+            order: order,
+            message: `🔄 Orden en preparación - Marcar como listo cuando termine`
+          });
+        } else if (order.status === ORDER_STATUSES.READY) {
+          setValidationResult({
+            success: true,
+            order: order,
+            message: `📦 Orden lista - Entregar al cliente`
+          });
+        } else {
+          setValidationResult({
+            success: true,
+            order: order,
+            message: `Estado actual: ${STATUS_DESCRIPTIONS[order.status] || 'Desconocido'}`
+          });
+        }
+        
+        // Recargar historial después de cualquier cambio
+        loadOrderHistory();
+      } else {
+        console.log('❌ Orden no encontrada');
+        setValidationResult({
+          success: false,
+          message: 'Código de orden no encontrado o inválido'
+        });
+      }
+    } catch (error) {
+      console.error('Error al buscar orden:', error);
+      setValidationResult({
+        success: false,
+        message: 'Error al validar la orden. Intenta de nuevo.'
+      });
+    } finally {
+      setIsValidating(false);
+    }
+  };
+
+  const handleSearch = () => {
+    handleSearchWithCode(searchCode);
+  };
+
+  const handleMarkReady = async () => {
+    try {
+      if (validationResult && validationResult.success && validationResult.order) {
+        const orderId = validationResult.order.id;
+        await orderManager.updateOrderStatus(orderId, ORDER_STATUSES.READY, `Pedido listo para recoger - Preparado por ${loggedInCashier.name}`);
+        
+        // Actualizar el resultado local para reflejar el cambio
+        const updatedOrder = await orderManager.getOrder(orderId);
+        setValidationResult({
+          ...validationResult,
+          order: updatedOrder,
+          message: `Orden actualizada - Estado: ${STATUS_DESCRIPTIONS[ORDER_STATUSES.READY] || 'Listo'}`
+        });
+        
+        // Recargar historial
+        loadOrderHistory();
+      }
+    } catch (error) {
+      console.error('Error al marcar como listo:', error);
+      alert('Error al actualizar el estado de la orden');
+    }
+  };
+
+  if (!loggedInCashier) {
+    return <CashierLogin onLogin={handleLogin} />;
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header - Responsive */}
+      <div className="bg-white shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 gap-4">
+            {/* Store Info */}
+            <div className="flex-1">
+              <h1 className="text-xl sm:text-2xl font-bold text-gray-900">OXXO - Módulo Cajero</h1>
+              <p className="text-sm text-gray-600">OXXO San Isidro Centro</p>
+            </div>
+            
+            {/* Cashier Info & Actions */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <RefreshCw size={16} className="text-green-500" />
+                <span>Sincronizado: {new Date(lastSyncTime).toLocaleTimeString()}</span>
+              </div>
+              
+              <div className="flex items-center gap-2 text-sm">
+                <User size={16} className="text-blue-600" />
+                <span className="font-medium">{loggedInCashier.name}</span>
+                <span className="text-gray-500">({loggedInCashier.shift})</span>
+              </div>
+              
+              <div className="flex gap-2">
+                <button 
+                  onClick={() => loadOrderHistory()}
+                  className="px-3 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-colors flex items-center gap-2 text-sm"
+                >
+                  <Clock size={16} />
+                  <span className="hidden sm:inline">Actualizar</span>
+                </button>
+                
+                <button 
+                  onClick={handleLogout}
+                  className="px-3 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors flex items-center gap-2 text-sm"
+                >
+                  <LogOut size={16} />
+                  <span className="hidden sm:inline">Salir</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 p-4 sm:p-6 lg:p-8">
+        {/* Main Content - 2 columns en desktop */}
+        <div className="lg:col-span-2 space-y-6">
+          {/* Search Section */}
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                Validar Pago de Cliente
+              </h2>
+              <p className="text-gray-600">Escanea o ingresa el código de orden del cliente</p>
+            </div>
+            
+            {/* Input Container - Mobile First */}
+            <div className="space-y-4">
+              {/* Fila de Input y Scanner */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="flex-1 relative">
+                  <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                    <Search className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Código de orden (ej: OXXO12345678)"
+                    value={searchCode}
+                    onChange={(e) => setSearchCode(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    disabled={isValidating}
+                    className="w-full pl-10 pr-4 py-4 text-lg font-mono border-2 border-gray-300 rounded-xl focus:border-red-500 focus:ring-4 focus:ring-red-100 transition-all duration-200 bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                  />
+                </div>
+                
+                {/* Botón Scanner - Grande en móvil */}
+                <button 
+                  onClick={() => setShowScanner(true)}
+                  disabled={isValidating}
+                  className="h-16 w-full sm:w-16 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all duration-200 flex items-center justify-center gap-2 sm:gap-0 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg active:scale-95"
+                >
+                  <Camera size={24} />
+                  <span className="sm:hidden font-semibold">Escanear QR</span>
+                </button>
+              </div>
+              
+              {/* Botón Buscar - Ancho completo en móvil */}
+              <button 
+                onClick={handleSearch}
+                disabled={isValidating}
+                className="w-full py-4 bg-blue-900 hover:bg-blue-800 text-white rounded-xl font-semibold text-lg transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg active:scale-95"
+              >
+                {isValidating ? (
+                  <>
+                    <RefreshCw className="animate-spin" size={20} />
+                    <span>Buscando...</span>
+                  </>
+                ) : (
+                  <>
+                    <Search size={20} />
+                    <span>Buscar Orden</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Validation Result */}
+          {validationResult && (
+            <div className={`rounded-xl p-6 ${validationResult.success 
+              ? 'bg-green-50 border-2 border-green-200' 
+              : 'bg-red-50 border-2 border-red-200'
+            }`}>
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                <div className={`p-3 rounded-full ${validationResult.success ? 'bg-green-100' : 'bg-red-100'}`}>
+                  {validationResult.success ? (
+                    <CheckCircle className="w-8 h-8 text-green-600" />
+                  ) : (
+                    <X className="w-8 h-8 text-red-600" />
+                  )}
+                </div>
+                
+                <div className="flex-1">
+                  <h3 className={`text-xl font-bold mb-2 ${validationResult.success ? 'text-green-800' : 'text-red-800'}`}>
+                    {validationResult.success 
+                      ? (validationResult.order?.status === ORDER_STATUSES.CONFIRMED 
+                          ? '✅ Orden Encontrada - Iniciar Preparación' 
+                          : validationResult.order?.status === ORDER_STATUSES.PREPARING
+                          ? '🔄 En Preparación - Marcar como Listo'
+                          : validationResult.order?.status === ORDER_STATUSES.READY
+                          ? '📦 Listo para Entregar'
+                          : '✅ Orden Válida')
+                      : '❌ Orden No Encontrada'
+                    }
+                  </h3>
+                  <p className={`${validationResult.success ? 'text-green-700' : 'text-red-700'}`}>
+                    {validationResult.message || 'Procesando validación...'}
+                  </p>
+                </div>
+              </div>
+
+              {/* Order Details */}
+              {validationResult.success && validationResult.order && (
+                <div className="mt-6 bg-white rounded-lg p-4 border border-gray-200">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <span className="text-sm font-medium text-gray-600">Cliente:</span>
+                      <p className="text-lg font-semibold">{validationResult.order.customerName || 'No disponible'}</p>
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-gray-600">Orden:</span>
+                      <p className="text-lg font-mono font-semibold text-blue-600">{validationResult.order.id}</p>
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-gray-600">Estado:</span>
+                      <p className="text-lg font-semibold">{STATUS_DESCRIPTIONS[validationResult.order.status]}</p>
+                    </div>
+                    <div>
+                      <span className="text-sm font-medium text-gray-600">Total:</span>
+                      <p className="text-xl font-bold text-green-600">{formatPrice(validationResult.order.total)}</p>
+                    </div>
+                  </div>
+
+                  {/* Products */}
+                  {validationResult.order.items && validationResult.order.items.length > 0 && (
+                    <div className="mt-4">
+                      <h4 className="text-lg font-semibold mb-3">Productos a Entregar</h4>
+                      <div className="space-y-3">
+                        {validationResult.order.items.map((item, index) => (
+                          <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div className="flex-1">
+                              <p className="font-medium">{item.name}</p>
+                              <p className="text-sm text-gray-600">Cantidad: {item.quantity}</p>
+                            </div>
+                            <p className="font-semibold text-lg">{formatPrice(item.price * item.quantity)}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Action Buttons */}
+                  {validationResult.order.status === ORDER_STATUSES.PREPARING && (
+                    <div className="mt-6">
+                      <button
+                        onClick={handleMarkReady}
+                        className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold text-lg transition-all duration-200 flex items-center justify-center gap-2 active:scale-95"
+                      >
+                        <Package size={20} />
+                        Marcar como Listo para Recoger
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Sidebar - Order History */}
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900">Historial de Órdenes</h3>
+            <button
+              onClick={() => loadOrderHistory()}
+              className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+            >
+              <RefreshCw size={16} />
+            </button>
+          </div>
+          
+          <div className="space-y-3 max-h-96 overflow-y-auto">
+            {orderHistory.map((order) => (
+              <div key={order.id} className="p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-sm font-mono text-blue-600 font-semibold">{order.id}</span>
+                  <span className={`text-xs px-2 py-1 rounded-full ${
+                    order.status === ORDER_STATUSES.READY ? 'bg-green-100 text-green-800' :
+                    order.status === ORDER_STATUSES.PREPARING ? 'bg-yellow-100 text-yellow-800' :
+                    order.status === ORDER_STATUSES.CONFIRMED ? 'bg-blue-100 text-blue-800' :
+                    'bg-gray-100 text-gray-800'
+                  }`}>
+                    {STATUS_DESCRIPTIONS[order.status]}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-700 font-medium">{order.customerName}</p>
+                <p className="text-sm font-bold text-green-600">{formatPrice(order.total)}</p>
+                <p className="text-xs text-gray-500 mt-1">
+                  {new Date(order.timestamp).toLocaleString()}
+                </p>
+              </div>
+            ))}
+            {orderHistory.length === 0 && (
+              <p className="text-center text-gray-500 py-8">No hay órdenes disponibles</p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* QR Scanner Modal */}
+      <AlternativeScanner 
+        isVisible={showScanner}
+        onScanSuccess={handleScanSuccess}
+        onClose={() => setShowScanner(false)}
+      />
+    </div>
+  );
+};
+
+export default CashierModule;

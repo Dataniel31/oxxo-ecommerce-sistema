@@ -1,0 +1,241 @@
+/* Checkout Styles */
+.checkout-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  padding: 1rem;
+}
+
+.checkout-modal {
+  background: var(--oxxo-white);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.9);
+  animation: modalAppear 0.3s ease-out forwards;
+}
+
+@keyframes modalAppear {
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Header */
+.checkout-header {
+  background: var(--oxxo-red);
+  color: var(--oxxo-white);
+  padding: 1.5rem;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-content h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--oxxo-white);
+  flex: 1;
+  text-align: center;
+}
+
+.back-btn, .close-btn {
+  background: none;
+  border: none;
+  color: var(--oxxo-white);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-btn:hover, .close-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Content */
+.checkout-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Order Summary */
+.order-summary {
+  background: var(--oxxo-light-gray);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+}
+
+.order-summary h3 {
+  margin: 0 0 1rem 0;
+  color: var(--oxxo-dark-blue);
+}
+
+.summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-total {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--oxxo-red);
+  font-size: 1.2rem;
+  color: var(--oxxo-red);
+  text-align: right;
+}
+
+/* Payment Methods Grid */
+.methods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.payment-method-card {
+  background: var(--oxxo-white);
+  border: 3px solid var(--oxxo-light-gray);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-method-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--method-color, var(--oxxo-red));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.payment-method-card:hover {
+  border-color: var(--method-color, var(--oxxo-red));
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.payment-method-card:hover::before {
+  transform: scaleX(1);
+}
+
+.method-icon {
+  color: var(--method-color, var(--oxxo-red));
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.payment-method-card h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--oxxo-dark-blue);
+  font-size: 1.2rem;
+}
+
+.payment-method-card p {
+  margin: 0;
+  color: var(--oxxo-gray);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Payment Process */
+.payment-process {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .checkout-overlay {
+    padding: 0.5rem;
+  }
+  
+  .checkout-modal {
+    max-height: 95vh;
+  }
+  
+  .checkout-header {
+    padding: 1rem;
+  }
+  
+  .header-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  .checkout-content {
+    padding: 1.5rem;
+  }
+  
+  .methods-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .payment-method-card {
+    padding: 1.5rem;
+  }
+  
+  .order-summary {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .checkout-content {
+    padding: 1rem;
+  }
+  
+  .payment-method-card {
+    padding: 1rem;
+  }
+  
+  .payment-method-card h4 {
+    font-size: 1.1rem;
+  }
+  
+  .summary-total {
+    font-size: 1.1rem;
+  }
+}

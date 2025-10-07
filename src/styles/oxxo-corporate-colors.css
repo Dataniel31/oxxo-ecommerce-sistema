@@ -1,0 +1,214 @@
+/* OXXO Corporate Colors - Official Brand Palette */
+/* Este archivo contiene la paleta oficial corporativa de OXXO */
+
+:root {
+  /* === COLORES PRINCIPALES CORPORATIVOS === */
+  
+  /* Rojo OXXO - Pantone PMS 485 C */
+  --oxxo-red: #DF0024;
+  --oxxo-red-dark: #B8001E;
+  --oxxo-red-light: #FF335A;
+  --oxxo-red-hover: #C4001F;
+  
+  /* Amarillo OXXO - Pantone PMS 123 C */
+  --oxxo-yellow: #F6D300;
+  --oxxo-yellow-dark: #D4B600;
+  --oxxo-yellow-light: #FFF4B3;
+  --oxxo-yellow-hover: #E8C400;
+  
+  /* Colores Neutros Corporativos */
+  --oxxo-white: #FFFFFF;
+  --oxxo-black: #000000;
+  
+  /* === COLORES COMPLEMENTARIOS === */
+  
+  /* Azul Corporativo Complementario */
+  --oxxo-dark-blue: #1A2951;
+  --oxxo-light-blue: #3B82F6;
+  
+  /* Grises Corporativos */
+  --oxxo-gray: #6B7280;
+  --oxxo-gray-light: #F9FAFB;
+  --oxxo-gray-medium: #9CA3AF;
+  --oxxo-gray-dark: #374151;
+  
+  /* === GRADIENTES CORPORATIVOS === */
+  --gradient-oxxo-primary: linear-gradient(135deg, var(--oxxo-red), var(--oxxo-red-dark));
+  --gradient-oxxo-secondary: linear-gradient(135deg, var(--oxxo-yellow), var(--oxxo-yellow-dark));
+  --gradient-oxxo-accent: linear-gradient(135deg, var(--oxxo-red), var(--oxxo-yellow));
+  --gradient-oxxo-hero: linear-gradient(135deg, var(--oxxo-red) 0%, var(--oxxo-red-dark) 50%, var(--oxxo-yellow) 100%);
+  
+  /* === SOMBRAS CORPORATIVAS === */
+  --shadow-oxxo-red: 0 8px 25px rgba(223, 0, 36, 0.3);
+  --shadow-oxxo-red-hover: 0 12px 35px rgba(223, 0, 36, 0.4);
+  --shadow-oxxo-yellow: 0 8px 25px rgba(246, 211, 0, 0.3);
+  --shadow-oxxo-yellow-hover: 0 12px 35px rgba(246, 211, 0, 0.4);
+  
+  /* === ESTADOS DE COMPONENTES === */
+  
+  /* Estados de Éxito */
+  --oxxo-success: #10B981;
+  --oxxo-success-light: #D1FAE5;
+  --oxxo-success-dark: #047857;
+  
+  /* Estados de Error */
+  --oxxo-error: #EF4444;
+  --oxxo-error-light: #FEE2E2;
+  --oxxo-error-dark: #DC2626;
+  
+  /* Estados de Advertencia */
+  --oxxo-warning: #F59E0B;
+  --oxxo-warning-light: #FEF3C7;
+  --oxxo-warning-dark: #D97706;
+  
+  /* Estados de Información */
+  --oxxo-info: #3B82F6;
+  --oxxo-info-light: #DBEAFE;
+  --oxxo-info-dark: #1D4ED8;
+  
+  /* === TRANSPARENCIAS === */
+  --oxxo-red-05: rgba(223, 0, 36, 0.05);
+  --oxxo-red-10: rgba(223, 0, 36, 0.1);
+  --oxxo-red-20: rgba(223, 0, 36, 0.2);
+  --oxxo-red-30: rgba(223, 0, 36, 0.3);
+  
+  --oxxo-yellow-05: rgba(246, 211, 0, 0.05);
+  --oxxo-yellow-10: rgba(246, 211, 0, 0.1);
+  --oxxo-yellow-20: rgba(246, 211, 0, 0.2);
+  --oxxo-yellow-30: rgba(246, 211, 0, 0.3);
+  
+  /* === FOCUS Y SELECCIÓN === */
+  --oxxo-focus-ring: 0 0 0 3px var(--oxxo-red-10);
+  --oxxo-selection-bg: var(--oxxo-red);
+  --oxxo-selection-color: var(--oxxo-white);
+}
+
+/* === APLICACIÓN GLOBAL DE COLORES === */
+
+/* Selección de texto */
+::selection {
+  background: var(--oxxo-selection-bg);
+  color: var(--oxxo-selection-color);
+}
+
+::-moz-selection {
+  background: var(--oxxo-selection-bg);
+  color: var(--oxxo-selection-color);
+}
+
+/* Focus ring corporativo */
+*:focus-visible {
+  outline: 2px solid var(--oxxo-red);
+  outline-offset: 2px;
+}
+
+/* === CLASES UTILITARIAS CORPORATIVAS === */
+
+/* Colores de texto */
+.text-oxxo-red { color: var(--oxxo-red); }
+.text-oxxo-yellow { color: var(--oxxo-yellow); }
+.text-oxxo-blue { color: var(--oxxo-dark-blue); }
+.text-oxxo-gray { color: var(--oxxo-gray); }
+
+/* Colores de fondo */
+.bg-oxxo-red { background-color: var(--oxxo-red); }
+.bg-oxxo-yellow { background-color: var(--oxxo-yellow); }
+.bg-oxxo-white { background-color: var(--oxxo-white); }
+.bg-oxxo-gray-light { background-color: var(--oxxo-gray-light); }
+
+/* Gradientes */
+.bg-gradient-oxxo-primary { background: var(--gradient-oxxo-primary); }
+.bg-gradient-oxxo-secondary { background: var(--gradient-oxxo-secondary); }
+.bg-gradient-oxxo-accent { background: var(--gradient-oxxo-accent); }
+.bg-gradient-oxxo-hero { background: var(--gradient-oxxo-hero); }
+
+/* Sombras */
+.shadow-oxxo-red { box-shadow: var(--shadow-oxxo-red); }
+.shadow-oxxo-yellow { box-shadow: var(--shadow-oxxo-yellow); }
+
+/* === BOTONES CORPORATIVOS === */
+.btn-oxxo-primary {
+  background: var(--gradient-oxxo-primary);
+  color: var(--oxxo-white);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-oxxo-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-oxxo-red-hover);
+}
+
+.btn-oxxo-secondary {
+  background: var(--gradient-oxxo-secondary);
+  color: var(--oxxo-black);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-oxxo-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-oxxo-yellow-hover);
+}
+
+.btn-oxxo-outline {
+  background: transparent;
+  color: var(--oxxo-red);
+  border: 2px solid var(--oxxo-red);
+  transition: all 0.3s ease;
+}
+
+.btn-oxxo-outline:hover {
+  background: var(--oxxo-red);
+  color: var(--oxxo-white);
+}
+
+/* === ANIMACIONES CORPORATIVAS === */
+@keyframes oxxo-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes oxxo-bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -8px, 0);
+  }
+  70% {
+    transform: translate3d(0, -4px, 0);
+  }
+  90% {
+    transform: translate3d(0, -2px, 0);
+  }
+}
+
+.animate-oxxo-pulse {
+  animation: oxxo-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-oxxo-bounce {
+  animation: oxxo-bounce 1s ease-in-out;
+}
+
+/* === RESPONSIVE HELPERS === */
+@media (prefers-reduced-motion: reduce) {
+  .animate-oxxo-pulse,
+  .animate-oxxo-bounce {
+    animation: none;
+  }
+}
+
+/* === COMPATIBILIDAD === */
+/* Fallbacks para navegadores que no soportan CSS custom properties */
+@supports not (color: var(--oxxo-red)) {
+  .text-oxxo-red { color: #DF0024; }
+  .bg-oxxo-red { background-color: #DF0024; }
+  .text-oxxo-yellow { color: #F6D300; }
+  .bg-oxxo-yellow { background-color: #F6D300; }
+}

@@ -1,0 +1,75 @@
+===============================================================================
+                         🚀 GUÍA RÁPIDA DE INICIO
+                           OXXO E-COMMERCE SYSTEM
+===============================================================================
+
+⚡ INICIO RÁPIDO (2 MINUTOS)
+===========================
+
+1️⃣ Abrir terminal en la carpeta Demo-MVP
+2️⃣ npm install
+3️⃣ npm run dev
+4️⃣ Abrir: https://localhost:5175/
+
+¡Listo! El sistema está funcionando.
+
+
+📱 PARA USAR EN MÓVIL
+====================
+
+1️⃣ Buscar en terminal la línea que dice:
+   ➜  Network: https://192.168.XXX.XXX:5175/
+
+2️⃣ Usar esa URL en el móvil (misma WiFi)
+
+3️⃣ Aceptar certificado de seguridad si aparece
+
+
+🧪 PRUEBA COMPLETA EN 30 SEGUNDOS
+=================================
+
+1️⃣ Ir a: /prueba
+2️⃣ Click "Crear Orden de Prueba"
+3️⃣ Copiar código que aparece
+4️⃣ Ir a: /cajero
+5️⃣ Login: cajero1 / 123456
+6️⃣ Pegar código y validar
+
+¡Sistema funcionando perfectamente!
+
+
+📞 CREDENCIALES DE ACCESO
+=========================
+
+👨‍💼 CAJERO:
+   Usuario: cajero1
+   Contraseña: 123456
+
+🧪 CÓDIGOS DE PRUEBA:
+   Coca-Cola: 9789586828529
+   (Usar en scanner del carrito)
+
+
+⚠️ ¿PROBLEMAS?
+==============
+
+🔴 No instala dependencias:
+   - Verificar Node.js instalado
+   - Ejecutar: npm cache clean --force
+
+🔴 No abre en móvil:
+   - Usar URL Network (no localhost)
+   - Verificar misma WiFi
+
+🔴 Cámara no funciona:
+   - Usar HTTPS (no HTTP)
+   - Permitir permisos de cámara
+
+🔴 Puerto ocupado:
+   - Terminar otros servidores
+   - O usar: npm run dev -- --port 3000
+
+
+===============================================================================
+                    ¿TODO LISTO? ¡A PROBAR EL SISTEMA! 🎊
+===============================================================================

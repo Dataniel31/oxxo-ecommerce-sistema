@@ -1,0 +1,194 @@
+===============================================================================
+                    🎊 OXXO PERÚ E-COMMERCE - SISTEMA COMPLETO
+                          INSTRUCCIONES DE INSTALACIÓN
+===============================================================================
+
+📋 REQUISITOS PREVIOS
+===================
+✅ Node.js (versión 16 o superior)
+   - Descargar desde: https://nodejs.org/
+   - Verificar instalación: node --version
+
+✅ Navegador web moderno (Chrome, Firefox, Edge, Safari)
+
+✅ Dispositivo con cámara (para scanner de códigos QR/barras)
+
+
+📦 INSTALACIÓN PASO A PASO
+==========================
+
+1️⃣ OBTENER EL CÓDIGO
+   - Si tienes ZIP: Descomprimir en carpeta deseada
+
+2️⃣ NAVEGAR A LA CARPETA
+   - Abrir terminal/CMD
+   - cd Demo-MVP
+   - Verificar que existe package.json
+
+3️⃣ INSTALAR DEPENDENCIAS
+   npm install
+   
+   📝 Nota: Esto descargará todas las librerías necesarias
+   ⏱️ Tiempo estimado: 2-5 minutos
+
+4️⃣ VERIFICAR INSTALACIÓN
+   - Debe aparecer carpeta "node_modules"
+   - No debe haber errores en terminal
+
+
+🚀 EJECUTAR EL PROGRAMA
+======================
+
+1️⃣ MODO DESARROLLO (Recomendado para pruebas)
+   npm run dev
+   
+   ✅ URLs disponibles:
+   - Local: https://localhost:5175/
+   - Red: https://[TU_IP]:5175/
+   
+   📱 Para móvil: Usar la URL de red (ej: https://192.168.1.100:5175/)
+
+2️⃣ MODO PRODUCCIÓN (Para uso final)
+   npm run build
+   npm run preview
+
+
+📱 PÁGINAS DISPONIBLES
+=====================
+
+🧪 PÁGINA DE PRUEBAS
+   URL: /prueba
+   - Sistema completo de testing
+   - Genera códigos de prueba automáticamente
+   - Flujo completo cliente-cajero
+
+🛒 CLIENTE E-COMMERCE
+   URL: / (página principal)
+   - Catálogo de productos OXXO
+   - Carrito con scanner de códigos
+   - 3 métodos de pago
+   - Sistema Click & Collect
+
+👨‍💼 MÓDULO CAJERO
+   URL: /cajero
+   - Login: cajero1 / 123456
+   - Validación de órdenes
+   - Scanner QR integrado
+   - Gestión tiempo real
+
+
+🎯 FUNCIONALIDADES PRINCIPALES
+=============================
+
+⚡ SCANNER DE CÓDIGOS
+- Solo cámara trasera (optimizado)
+- Detección automática HD
+- Códigos QR y barras
+- Velocidad optimizada móvil
+
+🛍️ E-COMMERCE COMPLETO
+- Productos reales OXXO
+- Carrito persistente
+- Click & Collect
+- Sincronización tiempo real
+
+💳 MÉTODOS DE PAGO
+- Tarjeta de crédito/débito
+- Yape/Plin QR
+- Efectivo en tienda
+
+🔄 SINCRONIZACIÓN
+- Cliente ↔ Cajero tiempo real
+- API local automática
+- Cross-device compatible
+
+
+📊 TESTING RÁPIDO
+================
+
+1️⃣ FLUJO COMPLETO
+   - Ir a /prueba
+   - Click "Crear Orden de Prueba"
+   - Copiar código generado
+   - Ir a /cajero → Login
+   - Validar código copiado
+
+2️⃣ SCANNER MÓVIL
+   - Abrir desde móvil
+   - Ir a carrito
+   - "Escanear Código de Barras"
+   - Probar código: 9789586828529
+
+3️⃣ CROSS-DEVICE
+   - Crear orden en dispositivo 1
+   - Validar en dispositivo 2 (cajero)
+
+
+🛠️ COMANDOS ÚTILES
+==================
+
+📦 Instalar dependencias:
+   npm install
+
+🚀 Ejecutar desarrollo:
+   npm run dev
+
+🏗️ Compilar producción:
+   npm run build
+
+👀 Vista previa compilado:
+   npm run preview
+
+🧹 Limpiar caché:
+   npm run clean (si existe)
+
+🔄 Reiniciar completamente:
+   - Cerrar servidor (Ctrl+C)
+   - rm -rf node_modules (Linux/Mac) o eliminar carpeta
+   - npm install
+   - npm run dev
+
+
+⚠️ SOLUCIÓN DE PROBLEMAS
+========================
+
+🚫 Error "Puerto ocupado"
+   - Cambiar puerto en vite.config.js
+   - O terminar proceso: netstat -ano | findstr :5175
+
+📱 No funciona en móvil
+   - Verificar que estés usando la URL de red
+   - Asegurar que ambos dispositivos estén en misma WiFi
+   - Permitir certificado HTTPS en móvil
+
+🎥 Cámara no funciona
+   - Permitir permisos de cámara en navegador
+   - Usar HTTPS (requerido para cámara)
+   - Probar en Chrome/Edge (mejor compatibilidad)
+
+🔄 Sincronización falla
+   - Verificar que API esté corriendo (/api/orders)
+   - Revisar consola del navegador para errores
+   - Ambos dispositivos deben usar misma URL base
+
+
+📞 INFORMACIÓN DEL SISTEMA
+=========================
+
+🎨 Tecnología: React 18 + Vite
+🎯 Diseño: UX/UI empresarial OXXO
+📱 Responsive: Mobile-first optimizado
+🔒 Seguridad: HTTPS + validaciones
+⚡ Performance: Optimizado para producción
+
+🎊 VERSIÓN: PREMIUM EDITION
+   - Sistema completo Click & Collect
+   - Scanner cámara trasera optimizado
+   - Cross-device sync tiempo real
+   - Diseño corporativo OXXO oficial
+
+
+===============================================================================
+                    ¡SISTEMA LISTO PARA PRODUCCIÓN! 🎯✨
+                   Para soporte: Revisar código fuente
+===============================================================================

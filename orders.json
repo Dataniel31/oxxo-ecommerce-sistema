@@ -1,0 +1,409 @@
+{
+  "OXXO12345678": {
+    "id": "OXXO12345678",
+    "customerName": "Juan Pérez",
+    "total": 11.9,
+    "items": [
+      {
+        "id": 1,
+        "name": "Coca-Cola 600ml",
+        "price": 3.5,
+        "quantity": 2
+      },
+      {
+        "id": 2,
+        "name": "Doritos Nacho",
+        "price": 4.9,
+        "quantity": 1
+      }
+    ],
+    "paymentMethod": "tarjeta",
+    "status": "confirmed",
+    "createdAt": "2025-10-07T00:37:50.266Z",
+    "updatedAt": "2025-10-07T00:37:50.267Z",
+    "timestamp": 1759797470267,
+    "statusHistory": [
+      {
+        "status": "confirmed",
+        "timestamp": "2025-10-07T00:37:50.267Z",
+        "description": "Orden de prueba creada"
+      }
+    ],
+    "deviceInfo": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36",
+    "syncTime": "2025-10-07T00:37:50.267Z",
+    "createdFrom": "192.168.101.5"
+  },
+  "OXXO87654321": {
+    "id": "OXXO87654321",
+    "customerName": "Ana Martínez",
+    "total": 11.1,
+    "items": [
+      {
+        "id": 4,
+        "name": "Inka Kola 500ml",
+        "price": 3.2,
+        "quantity": 2
+      },
+      {
+        "id": 5,
+        "name": "Pringles Original",
+        "price": 4.7,
+        "quantity": 1
+      }
+    ],
+    "paymentMethod": "yape",
+    "status": "confirmed",
+    "createdAt": "2025-10-07T00:37:50.347Z",
+    "updatedAt": "2025-10-07T00:37:50.347Z",
+    "timestamp": 1759797470347,
+    "statusHistory": [
+      {
+        "status": "confirmed",
+        "timestamp": "2025-10-07T00:37:50.347Z",
+        "description": "Orden de prueba creada"
+      }
+    ],
+    "deviceInfo": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36",
+    "syncTime": "2025-10-07T00:37:50.347Z",
+    "createdFrom": "192.168.101.5"
+  },
+  "OXXO941155257329": {
+    "items": [
+      {
+        "id": 1,
+        "name": "Coca-Cola 600ml",
+        "description": "Bebida gaseosa refrescante, sabor original",
+        "price": 3.5,
+        "originalPrice": 4,
+        "image": "https://www.wanta.pe/Multimedia/productos/detalle/COCA_COLA_SIN_AZUCAR_500_ML_202404101738539731.avif",
+        "category": "Bebidas",
+        "isPromotion": true,
+        "discount": 12,
+        "quantity": 1
+      }
+    ],
+    "total": 3.5,
+    "paymentMethod": "qr",
+    "paymentData": {
+      "method": "yape",
+      "transactionId": "YAPE94113505",
+      "timestamp": "2025-10-06T23:41:53.505Z",
+      "amount": 3.5,
+      "qrData": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=yape-pay-3.5-1759794108568&bgcolor=ffffff&color=000000"
+    },
+    "date": "2025-10-06T23:41:55.507Z",
+    "id": "OXXO941155257329",
+    "status": "delivered",
+    "createdAt": "2025-10-06T23:41:55.633Z",
+    "updatedAt": "2025-10-06T23:42:14.760Z",
+    "customerName": "Maria Perez Perez",
+    "timestamp": 1759794115633,
+    "statusHistory": [
+      {
+        "status": "confirmed",
+        "timestamp": "2025-10-06T23:41:55.633Z",
+        "description": "Pago confirmado exitosamente"
+      },
+      {
+        "status": "preparing",
+        "timestamp": "2025-10-06T23:42:05.300Z",
+        "description": "El cajero María González está preparando tu pedido"
+      },
+      {
+        "status": "ready",
+        "timestamp": "2025-10-06T23:42:11.623Z",
+        "description": "Pedido listo para recoger - Preparado por María González"
+      },
+      {
+        "status": "delivered",
+        "timestamp": "2025-10-06T23:42:14.760Z",
+        "description": "Pedido entregado al cliente - Confirmado por María González"
+      }
+    ],
+    "deviceInfo": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/28.0 Chrome/130.0.0.0 Mobile Safari/537.36",
+    "syncTime": "2025-10-06T23:42:14.760Z",
+    "createdFrom": "192.168.101.5"
+  },
+  "OXXO954524195316": {
+    "items": [
+      {
+        "id": 2,
+        "name": "Doritos Nacho 150g",
+        "description": "Tortilla chips con sabor a queso nacho",
+        "price": 4.9,
+        "image": "https://images.unsplash.com/photo-1566478989037-eec170784d0b?w=200&h=200&fit=crop&crop=center",
+        "category": "Snacks",
+        "isPromotion": false,
+        "quantity": 1
+      },
+      {
+        "id": 1,
+        "name": "Coca-Cola 600ml",
+        "description": "Bebida gaseosa refrescante, sabor original",
+        "price": 3.5,
+        "originalPrice": 4,
+        "image": "https://www.wanta.pe/Multimedia/productos/detalle/COCA_COLA_SIN_AZUCAR_500_ML_202404101738539731.avif",
+        "category": "Bebidas",
+        "isPromotion": true,
+        "discount": 12,
+        "quantity": 1
+      }
+    ],
+    "total": 8.4,
+    "paymentMethod": "qr",
+    "paymentData": {
+      "method": "yape",
+      "transactionId": "YAPE95450384",
+      "timestamp": "2025-10-07T00:04:10.384Z",
+      "amount": 8.4,
+      "qrData": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=yape-pay-8.4-1759795445826&bgcolor=ffffff&color=000000"
+    },
+    "date": "2025-10-07T00:04:12.386Z",
+    "id": "OXXO954524195316",
+    "status": "confirmed",
+    "createdAt": "2025-10-07T00:04:12.569Z",
+    "updatedAt": "2025-10-07T00:04:12.569Z",
+    "customerName": "Pedro Garcia Perez",
+    "timestamp": 1759795452569,
+    "statusHistory": [
+      {
+        "status": "confirmed",
+        "timestamp": "2025-10-07T00:04:12.569Z",
+        "description": "Pago confirmado exitosamente"
+      }
+    ],
+    "deviceInfo": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/28.0 Chrome/130.0.0.0 Mobile Safari/537.36",
+    "syncTime": "2025-10-07T00:04:12.569Z",
+    "createdFrom": "192.168.101.5"
+  },
+  "OXXO956063376546": {
+    "items": [
+      {
+        "id": 1,
+        "name": "Coca-Cola 600ml",
+        "description": "Bebida gaseosa refrescante, sabor original",
+        "price": 3.5,
+        "originalPrice": 4,
+        "image": "https://www.wanta.pe/Multimedia/productos/detalle/COCA_COLA_SIN_AZUCAR_500_ML_202404101738539731.avif",
+        "category": "Bebidas",
+        "isPromotion": true,
+        "discount": 12,
+        "quantity": 1
+      }
+    ],
+    "total": 3.5,
+    "paymentMethod": "qr",
+    "paymentData": {
+      "method": "yape",
+      "transactionId": "YAPE95604206",
+      "timestamp": "2025-10-07T00:06:44.206Z",
+      "amount": 3.5,
+      "qrData": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=yape-pay-3.5-1759795600006&bgcolor=ffffff&color=000000"
+    },
+    "date": "2025-10-07T00:06:46.206Z",
+    "id": "OXXO956063376546",
+    "status": "preparing",
+    "createdAt": "2025-10-07T00:06:46.471Z",
+    "updatedAt": "2025-10-07T00:07:34.501Z",
+    "customerName": "Luis Perez Martinez",
+    "timestamp": 1759795606471,
+    "statusHistory": [
+      {
+        "status": "confirmed",
+        "timestamp": "2025-10-07T00:06:46.471Z",
+        "description": "Pago confirmado exitosamente"
+      },
+      {
+        "status": "preparing",
+        "timestamp": "2025-10-07T00:07:34.507Z",
+        "description": "El cajero María González está preparando tu pedido"
+      }
+    ],
+    "deviceInfo": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/28.0 Chrome/130.0.0.0 Mobile Safari/537.36",
+    "syncTime": "2025-10-07T00:07:34.508Z",
+    "createdFrom": "192.168.101.5"
+  },
+  "OXXO957123656494": {
+    "items": [
+      {
+        "id": 1,
+        "name": "Coca-Cola 600ml",
+        "description": "Bebida gaseosa refrescante, sabor original",
+        "price": 3.5,
+        "originalPrice": 4,
+        "image": "https://www.wanta.pe/Multimedia/productos/detalle/COCA_COLA_SIN_AZUCAR_500_ML_202404101738539731.avif",
+        "category": "Bebidas",
+        "isPromotion": true,
+        "discount": 12,
+        "quantity": 1
+      }
+    ],
+    "total": 3.5,
+    "paymentMethod": "qr",
+    "paymentData": {
+      "method": "yape",
+      "transactionId": "YAPE95710228",
+      "timestamp": "2025-10-07T00:08:30.228Z",
+      "amount": 3.5,
+      "qrData": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=yape-pay-3.5-1759795704832&bgcolor=ffffff&color=000000"
+    },
+    "date": "2025-10-07T00:08:32.228Z",
+    "id": "OXXO957123656494",
+    "status": "confirmed",
+    "createdAt": "2025-10-07T00:08:32.499Z",
+    "updatedAt": "2025-10-07T00:08:32.499Z",
+    "customerName": "Luis Gonzalez Rodriguez",
+    "timestamp": 1759795712499,
+    "statusHistory": [
+      {
+        "status": "confirmed",
+        "timestamp": "2025-10-07T00:08:32.499Z",
+        "description": "Pago confirmado exitosamente"
+      }
+    ],
+    "deviceInfo": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/28.0 Chrome/130.0.0.0 Mobile Safari/537.36",
+    "syncTime": "2025-10-07T00:08:32.499Z",
+    "createdFrom": "192.168.101.5"
+  },
+  "OXXO959618931299": {
+    "items": [
+      {
+        "id": 1,
+        "name": "Coca-Cola 600ml",
+        "description": "Bebida gaseosa refrescante, sabor original",
+        "price": 3.5,
+        "originalPrice": 4,
+        "image": "https://www.wanta.pe/Multimedia/productos/detalle/COCA_COLA_SIN_AZUCAR_500_ML_202404101738539731.avif",
+        "category": "Bebidas",
+        "isPromotion": true,
+        "discount": 12,
+        "quantity": 1
+      }
+    ],
+    "total": 3.5,
+    "paymentMethod": "qr",
+    "paymentData": {
+      "method": "yape",
+      "transactionId": "YAPE95959858",
+      "timestamp": "2025-10-07T00:12:39.858Z",
+      "amount": 3.5,
+      "qrData": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=yape-pay-3.5-1759795953515&bgcolor=ffffff&color=000000"
+    },
+    "date": "2025-10-07T00:12:41.859Z",
+    "id": "OXXO959618931299",
+    "status": "confirmed",
+    "createdAt": "2025-10-07T00:12:42.005Z",
+    "updatedAt": "2025-10-07T00:12:42.005Z",
+    "customerName": "Carmen Torres Garcia",
+    "timestamp": 1759795962005,
+    "statusHistory": [
+      {
+        "status": "confirmed",
+        "timestamp": "2025-10-07T00:12:42.005Z",
+        "description": "Pago confirmado exitosamente"
+      }
+    ],
+    "deviceInfo": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/28.0 Chrome/130.0.0.0 Mobile Safari/537.36",
+    "syncTime": "2025-10-07T00:12:42.005Z",
+    "createdFrom": "192.168.101.5"
+  },
+  "OXXO960966030620": {
+    "items": [
+      {
+        "id": 1,
+        "name": "Coca-Cola 600ml",
+        "description": "Bebida gaseosa refrescante, sabor original",
+        "price": 3.5,
+        "originalPrice": 4,
+        "image": "https://www.wanta.pe/Multimedia/productos/detalle/COCA_COLA_SIN_AZUCAR_500_ML_202404101738539731.avif",
+        "category": "Bebidas",
+        "isPromotion": true,
+        "discount": 12,
+        "quantity": 1
+      }
+    ],
+    "total": 3.5,
+    "paymentMethod": "qr",
+    "paymentData": {
+      "method": "yape",
+      "transactionId": "YAPE96094499",
+      "timestamp": "2025-10-07T00:14:54.499Z",
+      "amount": 3.5,
+      "qrData": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=yape-pay-3.5-1759796085345&bgcolor=ffffff&color=000000"
+    },
+    "date": "2025-10-07T00:14:56.499Z",
+    "id": "OXXO960966030620",
+    "status": "confirmed",
+    "createdAt": "2025-10-07T00:14:56.736Z",
+    "updatedAt": "2025-10-07T00:14:56.736Z",
+    "customerName": "Carmen Torres Gonzalez",
+    "timestamp": 1759796096736,
+    "statusHistory": [
+      {
+        "status": "confirmed",
+        "timestamp": "2025-10-07T00:14:56.736Z",
+        "description": "Pago confirmado exitosamente"
+      }
+    ],
+    "deviceInfo": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/28.0 Chrome/130.0.0.0 Mobile Safari/537.36",
+    "syncTime": "2025-10-07T00:14:56.736Z",
+    "createdFrom": "192.168.101.5"
+  },
+  "OXXO974041433986": {
+    "items": [
+      {
+        "id": 1,
+        "name": "Coca-Cola 600ml",
+        "description": "Bebida gaseosa refrescante, sabor original",
+        "price": 3.5,
+        "originalPrice": 4,
+        "image": "https://www.wanta.pe/Multimedia/productos/detalle/COCA_COLA_SIN_AZUCAR_500_ML_202404101738539731.avif",
+        "category": "Bebidas",
+        "isPromotion": true,
+        "discount": 12,
+        "quantity": 1
+      }
+    ],
+    "total": 3.5,
+    "paymentMethod": "qr",
+    "paymentData": {
+      "method": "yape",
+      "transactionId": "YAPE97402050",
+      "timestamp": "2025-10-07T00:36:42.050Z",
+      "amount": 3.5,
+      "qrData": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=yape-pay-3.5-1759797398329&bgcolor=ffffff&color=000000"
+    },
+    "date": "2025-10-07T00:36:44.051Z",
+    "id": "OXXO974041433986",
+    "status": "delivered",
+    "createdAt": "2025-10-07T00:36:44.266Z",
+    "updatedAt": "2025-10-07T00:40:18.253Z",
+    "customerName": "Pedro Rodriguez Perez",
+    "timestamp": 1759797404266,
+    "statusHistory": [
+      {
+        "status": "confirmed",
+        "timestamp": "2025-10-07T00:36:44.266Z",
+        "description": "Pago confirmado exitosamente"
+      },
+      {
+        "status": "preparing",
+        "timestamp": "2025-10-07T00:40:03.799Z",
+        "description": "El cajero María González está preparando tu pedido"
+      },
+      {
+        "status": "ready",
+        "timestamp": "2025-10-07T00:40:14.963Z",
+        "description": "Pedido listo para recoger - Preparado por María González"
+      },
+      {
+        "status": "delivered",
+        "timestamp": "2025-10-07T00:40:18.253Z",
+        "description": "Pedido entregado al cliente - Confirmado por María González"
+      }
+    ],
+    "deviceInfo": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/28.0 Chrome/130.0.0.0 Mobile Safari/537.36",
+    "syncTime": "2025-10-07T00:40:18.253Z",
+    "createdFrom": "192.168.101.5"
+  }
+}

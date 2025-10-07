@@ -1,0 +1,83 @@
+/* App Styles */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--oxxo-light-gray);
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+.main-content {
+  flex: 1;
+  padding-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+/* Container with improved responsive design */
+.main-content .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Enhanced responsive breakpoints */
+@media (max-width: 1200px) {
+  .main-content .container {
+    max-width: 1000px;
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .main-content .container {
+    max-width: 750px;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-bottom: 1.5rem;
+  }
+  
+  .main-content .container {
+    max-width: 100%;
+    padding: 0 0.75rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .main-content {
+    padding-bottom: 1rem;
+  }
+  
+  .main-content .container {
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .main-content .container {
+    padding: 0 0.25rem;
+  }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus improvements */
+*:focus {
+  outline: 2px solid var(--oxxo-red);
+  outline-offset: 2px;
+}
+
+/* Selection color */
+::selection {
+  background: var(--oxxo-red);
+  color: white;
+}

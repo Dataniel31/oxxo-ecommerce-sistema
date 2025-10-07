@@ -1,0 +1,157 @@
+/* Fix de Contraste OXXO - Solución de visibilidad de texto */
+/* Este archivo asegura que todo el texto sea visible con los colores corporativos */
+
+/* === TOP BAR - MÁXIMA VISIBILIDAD === */
+.header .top-bar,
+header .top-bar,
+div.top-bar {
+  background: #1A2951 !important; /* Azul corporativo OXXO */
+  background-color: #1A2951 !important;
+  color: #FFFFFF !important; /* Blanco corporativo */
+  border-bottom: 2px solid #DF0024; /* Línea roja corporativa como acento */
+}
+
+/* Forzar color blanco en todos los elementos del top-bar */
+.header .top-bar,
+.header .top-bar *,
+.header .top-bar span,
+.header .top-bar .contact-info,
+.header .top-bar .contact-info span,
+header .top-bar *,
+div.top-bar *,
+.top-bar span:contains("📞"),
+.top-bar span:contains("📍") {
+  color: #FFFFFF !important;
+  font-weight: 500 !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* Botón de iniciar sesión - contraste máximo */
+.top-bar .user-actions .user-btn {
+  background: transparent !important;
+  border: 2px solid #FFFFFF !important;
+  color: #FFFFFF !important;
+  transition: all 0.3s ease !important;
+}
+
+.top-bar .user-actions .user-btn:hover {
+  background: #FFFFFF !important;
+  color: #1A2951 !important;
+  border-color: #FFFFFF !important;
+}
+
+/* === CASOS ESPECÍFICOS DE CONTRASTE === */
+
+/* OrderConfirmation - Información de contacto */
+.order-confirmation .contact-info {
+  background: #F9FAFB !important; /* Fondo gris muy claro */
+  border: 1px solid #E5E7EB !important; /* Borde sutil */
+}
+
+.order-confirmation .contact-info h4 {
+  color: #1A2951 !important; /* Azul oscuro */
+  font-weight: 600 !important;
+}
+
+.order-confirmation .contact-info p {
+  color: #374151 !important; /* Gris oscuro para buena legibilidad */
+  font-weight: 500 !important;
+}
+
+/* === REGLAS GENERALES DE EMERGENCIA === */
+
+/* Cualquier texto sobre fondo blanco debe ser oscuro */
+.bg-white,
+.bg-oxxo-white,
+[style*="background: white"],
+[style*="background: #fff"],
+[style*="background-color: white"],
+[style*="background-color: #fff"] {
+  color: #1F2937 !important;
+}
+
+/* Cualquier texto sobre fondo oscuro debe ser claro */
+.bg-dark,
+.bg-oxxo-dark-blue,
+[style*="background: #1A2951"],
+[style*="background-color: #1A2951"] {
+  color: #FFFFFF !important;
+}
+
+/* === RESPONSIVE FIXES === */
+
+/* Mobile - Mantener visibilidad */
+@media (max-width: 768px) {
+  .top-bar {
+    display: block !important; /* Nunca ocultar completamente */
+    padding: 0.75rem 0 !important;
+  }
+  
+  .top-bar .contact-info {
+    gap: 1.5rem !important;
+  }
+  
+  .top-bar .contact-info span {
+    font-size: 0.85rem !important;
+    color: #FFFFFF !important;
+  }
+}
+
+/* Extra small mobile */
+@media (max-width: 480px) {
+  .top-bar {
+    display: block !important; /* Forzar visibilidad */
+    padding: 0.5rem 0 !important;
+    text-align: center !important;
+  }
+  
+  .top-bar-content {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+  }
+  
+  .contact-info {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  
+  .contact-info span {
+    justify-content: center !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .user-actions .user-btn {
+    padding: 0.4rem 1rem !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+/* === DEBUG MODE (activar solo si es necesario) === */
+/*
+.debug-contrast * {
+  border: 1px solid red !important;
+  background: yellow !important;
+  color: black !important;
+}
+*/
+
+/* === MEJORAS DE ACCESIBILIDAD === */
+
+/* Focus states más visibles */
+.top-bar a:focus,
+.top-bar button:focus {
+  outline: 3px solid #F6D300 !important; /* Amarillo OXXO para focus */
+  outline-offset: 2px !important;
+}
+
+/* Selección de texto visible */
+.top-bar ::selection {
+  background: #DF0024 !important; /* Rojo OXXO */
+  color: #FFFFFF !important;
+}
+
+.top-bar ::-moz-selection {
+  background: #DF0024 !important;
+  color: #FFFFFF !important;
+}
